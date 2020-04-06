@@ -36,3 +36,26 @@ var levelOrder = function(root) {
 }
 
 
+// ------------更新：BFS解法，遍历时记录层级--------------
+
+var levelOrder = function(root) {
+  // 队列，广度优先
+  if(!root) return [];
+  let res = []
+  let queue = []
+  // 先把根节点推进去算一层
+  queue.push(root)
+  while(queue.length){
+      let list = []  //这次循环结束 下一层单个解
+      let size = queue.length //当前层节点个数
+      for(let i=0; i<size; ++i){
+          let curNode = queue.shift()
+         list.push(curNode.val)
+         if(curNode.left) queue.push(curNode.left)//递归遍历左右结点
+         if(curNode.right) queue.push(curNode.right) 
+      }
+      res.push(list)
+  }
+ 
+  return res
+};
